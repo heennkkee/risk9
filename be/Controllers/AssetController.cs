@@ -26,18 +26,36 @@ namespace risk9.Controllers {
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Asset>> ListAll()
+        [ProducesResponseType(typeof(List<Asset>), 200)]
+        public async Task<IActionResult> ListAll()
         {
-            return await _context.Assets.ToListAsync();
+            return Ok(await _context.Assets.ToListAsync());
         }
 
         [HttpPost]
-        public async Task<Asset> Add([FromBody] AssetBinding newAsset)
+        [ProducesResponseType(typeof(Asset), 200)]
+        public async Task<IActionResult> Add([FromBody] AssetBinding newAsset)
         {
-            var t = _mapper.Map<Asset>(newAsset);
-            await _context.Assets.AddAsync(t);
+            Asset asset = _mapper.Map<Asset>(newAsset);
+            await _context.Assets.AddAsync(asset);
             await _context.SaveChangesAsync();
-            return t;
+            return Ok(asset);
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(Asset), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Update(int id, [FromBody] AssetBinding update)
+        {
+            Asset? asset = await _context.Assets.FirstOrDefaultAsync(x => x.AssetId == id);
+            if (asset != null) {
+                _mapper.Map<AssetBinding, Asset>(update, asset);
+                _context.Assets.Update(asset);
+                await _context.SaveChangesAsync();
+                return Ok();
+            }
+            return NotFound();
         }
         
     }

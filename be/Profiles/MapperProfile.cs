@@ -7,7 +7,8 @@ namespace risk9.Profiles {
     {
         public MapperProfile()
         {
-            CreateMap<AssetBinding, Asset>();
+            CreateMap<AssetBinding, Asset>()
+                .ReverseMap();
         }
     }
 }

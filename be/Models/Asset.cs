@@ -12,7 +12,6 @@ namespace risk9.Models {
         public Asset(string description) : base(description)
         {
         }
-        [BindNever]
         public int AssetId { get; set; }
     }
 }
