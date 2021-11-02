@@ -32,14 +32,29 @@ namespace risk9.Controllers {
             return Ok(await _context.Assets.ToListAsync());
         }
 
-        [HttpPost]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(Asset), 200)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> GetAsset(int id)
+        {
+            Asset? asset = await _context.Assets.FirstOrDefaultAsync(x => x.AssetId == id);
+            
+            if (asset == null) 
+            {
+                return NotFound();
+            }
+
+            return Ok(asset);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(Asset), 201)]
         public async Task<IActionResult> Add([FromBody] AssetBinding newAsset)
         {
             Asset asset = _mapper.Map<Asset>(newAsset);
             await _context.Assets.AddAsync(asset);
             await _context.SaveChangesAsync();
-            return Ok(asset);
+            return CreatedAtAction(nameof(GetAsset), new { id = asset.AssetId }, asset);
         }
 
         [HttpPut]
@@ -57,6 +72,20 @@ namespace risk9.Controllers {
             }
             return NotFound();
         }
-        
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> Remove(int id)
+        {
+            Asset? asset = await _context.Assets.FirstOrDefaultAsync(x => x.AssetId == id);
+            if (asset != null) {
+                _context.Assets.Remove(asset);
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            return NotFound();
+        }
     }
 }

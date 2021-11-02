@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using risk9.Data;
 using Microsoft.EntityFrameworkCore;
+using risk9.Swagger;
 
 namespace risk9
 {
@@ -32,6 +33,8 @@ namespace risk9
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "risk9", Version = "v1" });
+                c.SchemaFilter<RequireNonNullablePropertiesSchemaFilter>();
+                c.SupportNonNullableReferenceTypes();
             });
         }
 

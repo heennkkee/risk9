@@ -4,11 +4,11 @@ namespace risk9.Bindings
 {
     public class AssetBinding
     {
-        [Required]
         public string Description { get; set; }
         public string? Description2 { get; set; }
-        public int NumberThing { get; set; }
-        
+        [Required]
+        public int? NumberThing { get; set; }
+
         public AssetBinding(string description)
         {
             Description = description;
