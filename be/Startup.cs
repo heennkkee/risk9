@@ -29,6 +29,12 @@ namespace risk9
             );
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+
+            services.AddCors(c => c.AddPolicy("LocalDevelopment", builder =>
+            {
+                builder.WithOrigins("http://localhost:3000");
+            }));
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -47,6 +53,8 @@ namespace risk9
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "risk9 v1"));
                 dataContext.Database.Migrate();
+
+                app.UseCors("LocalDevelopment");
             } 
 
             app.UseRouting();
