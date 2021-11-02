@@ -33,6 +33,9 @@ namespace risk9
             services.AddCors(c => c.AddPolicy("LocalDevelopment", builder =>
             {
                 builder.WithOrigins("http://localhost:3000");
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+                builder.AllowCredentials();
             }));
 
             services.AddControllers();
