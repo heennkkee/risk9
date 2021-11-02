@@ -6,7 +6,8 @@
     "generators": {
       "v1.0": {
         "generatorName": "default",
-        "output": "#{cwd}/local_modules/AssetApi/#{name}",
+        "inputSpec": "http://localhost:5000/swagger/v1/swagger.json",
+        "output": "#{cwd}/local_modules/AssetApi/",
         "additionalProperties": {
           "npmName": "@risk9/assetapi",
           "npmVersion": "1.0.0"
