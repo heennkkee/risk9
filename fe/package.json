@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@risk9/api": "file:local_modules/@risk9/api",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -21,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "generate-client": "openapi-generator-cli generate -g typescript -i http://localhost:5000/swagger/v1/swagger.json --generator-key v1.0"
+    "generate-client": "openapi-generator-cli generate --generator-key v1.0 && cd local_modules/@risk9/api && npm install && npm run build"
   },
   "eslintConfig": {
     "extends": [

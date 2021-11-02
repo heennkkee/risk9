@@ -1,27 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 
-import * as AA from '@risk9/AssetApi';
+import * as r9 from '@risk9/api';
+
+const configuration = new r9.Configuration({
+    basePath: "http://localhost:5000"
+});
+
+const api = new r9.AssetApi(configuration);
+
 
 function App() {
-    const configuration = AA.createConfiguration({
-        baseServer: new AA.ServerConfiguration("http://localhost:5000", {})
-    });
 
-    const apiInstance = new AA.AssetApi(configuration);
+    const [assets, setAssets] = useState<r9.Asset[]>([]);
 
     useEffect(() => {
         const callAsync = async () => {
-            await apiInstance.assetGet().then((assets) => {
-                assets.map(asset => {
-                    console.log(asset.assetId)
-                }
-            })
+            await api.assetGet().then((assets) => {
+                setAssets(assets);
+            }).catch(err => {
+                debugger;
+                console.log("ERROR: ", err)
+            });
         }
         callAsync();
     }, []);
+
   return (
     <div className="App">
       <header className="App-header">
