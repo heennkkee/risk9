@@ -2,6 +2,16 @@
   "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
   "spaces": 2,
   "generator-cli": {
-    "version": "5.3.0"
+    "version": "5.3.0",
+    "generators": {
+      "v1": {
+        "generatorName": "default",
+        "output": "#{cwd}/local_modules/AssetApi/#{name}",
+        "additionalProperties": {
+          "npmName": "@risk9/assetapi",
+          "npmVersion": "1.0.0"
+        }
+      }
+    }
   }
 }
