@@ -10,7 +10,7 @@
         "output": "#{cwd}/local_modules/@risk9/api/",
         "additionalProperties": {
           "npmName": "@risk9/api",
-          "npmVersion": "1.0.1"
+          "npmVersion": "1.0.3"
         }
       }
     }
