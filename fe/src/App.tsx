@@ -3,9 +3,7 @@ import './App.css';
 
 import * as r9 from '@risk9/api';
 
-const configuration = new r9.Configuration({
-    basePath: "http://localhost:5000"
-});
+const configuration = r9.createConfiguration({baseServer: new r9.ServerConfiguration('http://localhost:5000', {})});
 
 const api = new r9.AssetApi(configuration);
 
@@ -28,13 +26,13 @@ function App() {
     }, []);
 
     const removeAsset = async (id: number) => {
-        await api.assetIdDelete({ id: id }).then(() => {
+        await api.assetIdDelete(id).then(() => {
             setAssets([...assets.filter(asset => asset.assetId !== id)]);
         });
     }
 
     const addAsset = async (inp: r9.AssetBinding) => {
-        await api.assetPost({ assetBinding: inp }).then(asset => {
+        await api.assetPost(inp).then(asset => {
             setAssets([...assets, asset]);
         }).catch(err => {
             console.log("ERR", err);
