@@ -4,7 +4,7 @@
   "generator-cli": {
     "version": "5.3.0",
     "generators": {
-      "v1": {
+      "v1.0": {
         "generatorName": "default",
         "output": "#{cwd}/local_modules/AssetApi/#{name}",
         "additionalProperties": {
