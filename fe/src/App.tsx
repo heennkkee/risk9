@@ -7,7 +7,7 @@ import { ApiProvider } from './context/ApiContext';
 import { Routes, Route } from 'react-router';
 import Home from './route/Home';
 import Test from './route/Test';
-import Navbar from './comp/Navbar';
+import Sidebar from './comp/Sidebar/Sidebar';
 
 
 const configuration = r9.createConfiguration({baseServer: new r9.ServerConfiguration('http://localhost:5000', {})});
@@ -19,7 +19,7 @@ function App() {
     return (
         <ApiProvider value={api}>
             <div className="d-flex h-100">
-                <Navbar />
+                <Sidebar />
                 <Container fluid>
                     <Routes>
                         <Route path="/" element={<Home />} />

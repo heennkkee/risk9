@@ -68,7 +68,7 @@ namespace risk9.Controllers {
                 _mapper.Map<AssetBinding, Asset>(update, asset);
                 _context.Assets.Update(asset);
                 await _context.SaveChangesAsync();
-                return Ok();
+                return Ok(asset);
             }
             return NotFound();
         }
