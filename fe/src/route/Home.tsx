@@ -64,8 +64,9 @@ const Home = () => {
                                     onMouseEnter={() => { if (draggingAsset !== null) setHoverOver(asset); }}
                                     onMouseUp={() => {
                                         if (draggingAsset !== null) {
-                                            let reorderedAssets = assets.filter(x => x.assetId !== draggingAsset.assetId);
-                                            reorderedAssets = [...reorderedAssets.slice(0, ix), draggingAsset, ...reorderedAssets.slice(ix)];
+                                            // Probably pretty inefficient, just store some references to waht ix is being moved around?
+                                            let filteredAssets = assets.filter(x => x.assetId !== draggingAsset.assetId);
+                                            let reorderedAssets = [...filteredAssets.slice(0, ix), draggingAsset, ...filteredAssets.slice(ix)];
                                             setAssets(reorderedAssets);
                                             setDraggingAsset(null);
                                             setHoverOver(null);
